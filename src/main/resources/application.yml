@@ -1,0 +1,6 @@
+server:
+  servlet:
+#    context-path: /simple-hello
+app:
+  resources:
+      greeting: ${resources.greeting}

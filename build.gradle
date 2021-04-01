@@ -6,6 +6,10 @@ plugins {
 
 group = 'me.potato'
 version = '0.0.1-SNAPSHOT'
+def buildNumber = System.getenv( 'BUILD_NUMBER' ).toString()
+def dockerHubUser = System.getenv( 'USERNAME' ).toString()
+def dockerHubPassword = System.getenv( 'PASSWORD' ).toString()
+
 sourceCompatibility = '11'
 
 configurations {
@@ -28,3 +32,16 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+//
+//bootBuildImage {
+//    imageName = "bravopotato/${project.name}:$buildNumber"
+//    publish = true
+//    docker {
+//        publishRegistry {
+//            username = "$dockerHubUser"
+//            password = "$dockerHubPassword"
+//            email = "bravopotato@gmail.com"
+//            url = "https://hub.docker.com/bravopotato"
+//        }
+//    }
+//}

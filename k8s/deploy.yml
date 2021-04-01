@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-hello-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: simple-hello
+  template:
+    metadata:
+      labels:
+        app: simple-hello
+    spec:
+      containers:
+        - name: simple-hello
+          image: IMAGE_NAME_PLACEHOLDER
+          ports:
+            - containerPort: 8080
+          imagePullPolicy: Always
+          envFrom:
+            - configMapRef:
+                name: simple-hello
+          readinessProbe:
+            failureThreshold: 20
+            httpGet:
+              path: /simple-hello/health
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 3
